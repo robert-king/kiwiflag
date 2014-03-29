@@ -1,0 +1,9 @@
+*.pyc
+.idea
+*.buildlog
+.DS_Store
+packages
+.project
+node_modules
+build
+app

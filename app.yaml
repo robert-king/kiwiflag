@@ -1,0 +1,52 @@
+application: kiwiflag
+version: 1
+runtime: python27
+threadsafe: true
+api_version: 1
+
+handlers:
+# Endpoints handler
+#- url: /_ah/spi/.*
+#  script: test_api.APPLICATION
+#  secure: always
+#
+#- url: /favicon\.ico
+#  static_files: favicon.ico
+#  upload: favicon\.ico
+#  secure: always
+
+- url: /kiwiflag
+  static_dir: Chapter_07
+  secure: always
+
+
+#- url: /test-app
+#  script: redirector.app
+#  login: admin
+#  secure: always
+#
+#- url: /test-app/
+#  static_files: angular-seed-master/app/index.html
+#  upload: angular-seed-master/app/index.html
+#  secure: always
+#
+#- url: /test-app
+#  static_dir: angular-seed-master/app
+#  secure: always
+#
+#- url: /test-app2
+#  static_dir: Chapter_07_new
+#  secure: always
+#
+- url: .*
+  script: redirector.app
+  secure: always
+
+
+libraries:
+#- name: pycrypto
+#  version: latest
+- name: endpoints
+  version: 1.0
+- name: webapp2
+  version: "latest"
