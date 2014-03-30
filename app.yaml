@@ -1,5 +1,5 @@
-application: kiwiflag
-version: 1
+application: kiwi-flag
+version: dev
 runtime: python27
 threadsafe: true
 api_version: 1
@@ -40,7 +40,7 @@ handlers:
 #
 - url: .*
   script: redirector.app
-  secure: always
+#  secure: always
 
 
 libraries:
@@ -50,3 +50,15 @@ libraries:
   version: 1.0
 - name: webapp2
   version: "latest"
+
+skip_files:
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(statistics/.*)
+- ^(app/.*)
+- ^(Chapter_07/.*)
+- ^(unittests/.*)
+- ^(webtests/.*)
