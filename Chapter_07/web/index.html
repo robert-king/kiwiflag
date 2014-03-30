@@ -4,13 +4,22 @@
     <title>Chapter Seven - A Simple Recipe Book</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-3.1.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css">
 </head>
-<body flags ng-cloak>
-<i class="fa fa-cogs"></i>
- <ng-view></ng-view>
+<body ng-cloak>
+<ul class="nav nav-pills">
+    <li class="active"><a href="#/flags">NZ Flags</a></li>
+    <li class="active"><a href="#/upload">Upload</a></li>
+    <li class="active"><a href="#/discus">Discus</a></li>
+    <li class="active"><a href="#/about">About</a></li>
+</ul>
+<div class="jumbotron">
+    <ng-view></ng-view>
+</div>
 
-  <script src="packages/shadow_dom/shadow_dom.min.js"></script>
-  <script type="application/dart" src="main.dart"></script>
-  <script type="text/javascript" src="packages/browser/dart.js"></script>
+<script src="packages/shadow_dom/shadow_dom.min.js"></script>
+<script type="application/dart" src="main.dart"></script>
+<script type="text/javascript" src="packages/browser/dart.js"></script>
 </body>
 </html>
