@@ -4,6 +4,9 @@ import 'package:angular/angular.dart';
 
 void recipeBookRouteInitializer(Router router, RouteViewFactory views) {
   views.configure({
+    'flags': ngRoute(
+        path: '/flags',
+        view: 'view/flags.html'),
     'add': ngRoute(
         path: '/add',
         view: 'view/addRecipe.html'),

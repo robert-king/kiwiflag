@@ -15,6 +15,7 @@ import 'package:di/annotations.dart';
 import 'package:logging/logging.dart';
 
 import 'package:angular_dart_demo/recipe_book.dart';
+import 'package:angular_dart_demo/flags_controller.dart';
 import 'package:angular_dart_demo/filter/category_filter.dart';
 import 'package:angular_dart_demo/rating/rating_component.dart';
 import 'package:angular_dart_demo/tooltip/tooltip_directive.dart';
@@ -33,6 +34,7 @@ import 'initializer-dev.dart' as init; // Use in dev.
 class MyAppModule extends Module {
   MyAppModule() {
     type(RecipeBookController);
+    type(FlagsController);
     type(RatingComponent);
     type(Tooltip);
     type(CategoryFilter);
