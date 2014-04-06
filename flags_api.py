@@ -6,8 +6,9 @@ import endpoints
 from protorpc import messages
 from protorpc import message_types
 from protorpc import remote
-
+from google.appengine.ext.blobstore.blobstore import create_upload_url
 from google.appengine.api import users
+from models import Flag
 
 
 an_api = endpoints.api(name='kiwiflag',
@@ -17,18 +18,38 @@ an_api = endpoints.api(name='kiwiflag',
 )
 
 
-class FlagMessage(messages.Message):
-    name = messages.StringField(1)
+class StringMessage(messages.Message):
+    s = messages.StringField(1)
 
 
 @an_api.api_class(resource_name='flags-api', path="flag-sapi")
 class FlagsApi(remote.Service):
-    @endpoints.method(message_types.VoidMessage, FlagMessage,
+    @endpoints.method(message_types.VoidMessage, StringMessage,
                       path='flags-list', http_method='GET',
                       name='flags-list')
     def flags_list(self, unused_request):
         #should do pagination etc.
-        return FlagMessage(name="hi")
+        return StringMessage(s="hi")
+
+    @endpoints.method(StringMessage, StringMessage,
+                      path='flag', http_method='GET',
+                      name='flag')
+    def flag(self, urlsafe_flagkey):
+        #for now only returns a link to the flags image. Perhaps FlagMessage should be msgprop of Flag.
+        flag = ndb.Key(urlsafe=urlsafe_flagkey.s).get()
+        return StringMessage(s=flag.link)
+
+    @endpoints.method(message_types.VoidMessage, StringMessage,
+                      path='upload-url', http_method='GET',
+                      name='upload-url')
+    def upload_url(self, unused_request):
+        #where flags are uploaded to.
+        url = create_upload_url('/upload-flag',
+                      max_bytes_per_blob=None,
+                      max_bytes_total=None,
+                      rpc=None,
+                      gs_bucket_name=None)
+        return StringMessage(s=url)
 
 
 APPLICATION = endpoints.api_server([FlagsApi]) #can add upload API.

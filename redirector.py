@@ -1,26 +1,34 @@
 #!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+import logging
+
 import webapp2
+from google.appengine.api.images import get_serving_url
+from google.appengine.ext.webapp import blobstore_handlers
+
+from models import Flag
+
+
+class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+    def post(self):
+        upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
+        blob_info = upload_files[0]
+        logging.info('creating link')
+        link = get_serving_url(blob_info.key()) #hopefully this will error if blob isn't an image.
+        logging.info('link created.. creating flag..')
+        flag_key = Flag(link=link).put() #TODO: also store the blobkey in case we need it
+        logging.info('flag created..')
+        self.redirect('/kiwiflag/web/index.html#/flag-viewer/%s' % flag_key.urlsafe())
+
 
 class RedirectToTestApp(webapp2.RequestHandler):
     def get(self):
         self.redirect('/kiwiflag/web/index.html')
         #self.response.write('use chromium and go to     /kiwiflag/web/index.html')
 
+
 app = webapp2.WSGIApplication([
-    ('.*', RedirectToTestApp)
-], debug=True)
+                                  ('/upload-flag', UploadHandler),
+                                  ('.*', RedirectToTestApp)
+                              ],
+                              debug=True
+)

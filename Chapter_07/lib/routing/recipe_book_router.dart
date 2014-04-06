@@ -16,23 +16,21 @@ void recipeBookRouteInitializer(Router router, RouteViewFactory views) {
       'about': ngRoute(
           path: '/about',
           view: 'view/about.html'),
-
-
-//    'recipe': ngRoute(
-//        path: '/recipe/:recipeId',
-//        mount: {
-//          'view': ngRoute(
-//              path: '/view',
-//              view: 'view/viewRecipe.html'),
-//          'edit': ngRoute(
-//              path: '/edit',
-//              view: 'view/editRecipe.html'),
-//          'view_default': ngRoute(
-//              defaultRoute: true,
-//              enter: (RouteEnterEvent e) =>
-//                  router.go('view', {},
-//                      startingFrom: router.root.findRoute('recipe'),
-//                      replace: true))
-//        })
+    'flag-viewer': ngRoute(
+        path: '/flag-viewer/:urlsafe_flagkey',
+        mount: {
+          'view': ngRoute(
+              path: '/view',
+              view: 'view/flag-viewer.html'),
+          'edit': ngRoute(
+              path: '/edit',
+              view: 'view/flag-viewer.html'),
+          'view_default': ngRoute(
+              defaultRoute: true,
+              enter: (RouteEnterEvent e) =>
+                  router.go('view', {}, //Warning - backend redirects to this (hard coded) default route after uploading flag.
+                      startingFrom: router.root.findRoute('flag-viewer'),
+                      replace: true))
+        })
   });
 }

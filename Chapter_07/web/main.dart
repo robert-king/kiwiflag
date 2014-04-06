@@ -38,6 +38,7 @@ class MyAppModule extends Module {
     type(UploadController);
     type(DiscusController);
     type(AboutController);
+    type(FlagViewer);
     type(RatingComponent);
     type(Tooltip);
     type(CategoryFilter);
