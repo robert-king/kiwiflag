@@ -5,11 +5,11 @@ threadsafe: true
 api_version: 1
 
 handlers:
-# Endpoints handler
-#- url: /_ah/spi/.*
-#  script: test_api.APPLICATION
-#  secure: always
-#
+#Endpoints handler
+- url: /_ah/spi/.*
+  script: flags_api.APPLICATION
+  secure: always
+
 #- url: /favicon\.ico
 #  static_files: favicon.ico
 #  upload: favicon\.ico
