@@ -1,8 +1,8 @@
 <div class="container" upload>
-    {{ctrl.x}}
+    {{ctrl.upload_url}}
     <br>
 
-    <form  role="form" action="http://127.0.0.1:8080/_ah/upload/ag1kZXZ-a2l3aS1mbGFnciILEhVfX0Jsb2JVcGxvYWRTZXNzaW9uX18YgICAgIDArwkM" method="POST" enctype="multipart/form-data">
+    <form  role="form" action="{{ctrl.upload_url}}" method="POST" enctype="multipart/form-data">
         Upload File: <input type="file" name="file"> <br>
         <div class="form-group">
             <label for="name" class="control-label">Name</label>

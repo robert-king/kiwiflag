@@ -5,6 +5,7 @@ import 'package:angular/angular.dart';
 import 'tooltip/tooltip_directive.dart';
 import 'service/recipe.dart';
 import 'service/query_service.dart';
+import 'package:angular_dart_demo/login_controller.dart';
 
 
 @NgController(
@@ -23,9 +24,10 @@ class FlagsController {
     selector: '[upload]',
     publishAs: 'ctrl')
 class UploadController {
-  var x = "upload..";
-  UploadController() {
+  String upload_url;
+  UploadController(LoginController lc) {
     print('in upload ctrl');
+    lc.kf.flagsapi.uploadurl().then((r)=>upload_url = r.s);
   }
 }
 
@@ -59,10 +61,11 @@ class AboutController {
     selector: '[flag-viewer]',
     publishAs: 'ctrl')
 class FlagViewer {
-  String urlsafe_flagkey = "";
-  FlagViewer(RouteProvider routeProvider) {
+  String flag_link;
+  FlagViewer(RouteProvider routeProvider, LoginController lc) {
     print('in flag viewer ctrl');
-    urlsafe_flagkey = routeProvider.parameters['urlsafe_flagkey'];
-  }
+    var urlsafe_flagkey = routeProvider.parameters['urlsafe_flagkey'];
+    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag_link=r.s);
 
+  }
 }

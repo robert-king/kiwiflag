@@ -1,3 +1,4 @@
 <div flag-viewer>
-    {{ctrl.urlsafe_flagkey}}
+    <span ng-if="ctrl.flag_link==null">Loading..</span>
+    <img ng-src="{{ctrl.flag_link}}">
 </div>
