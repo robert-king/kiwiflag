@@ -55,8 +55,8 @@ packages:
     version: "0.9.0"
   google_kiwiflag_v1_api:
     description:
-      path: "/Users/robertking/src/personal/kiwiflag/dart_kiwiflag_v1_api_client"
-      relative: false
+      path: "..\\dart_kiwiflag_v1_api_client"
+      relative: true
     source: path
     version: "0.4.0"
   google_oauth2_client:

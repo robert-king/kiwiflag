@@ -1,8 +1,52 @@
-<div upload>
+<div class="container" upload>
     {{ctrl.x}}
     <br>
-    <form action="http://127.0.0.1:8080/_ah/upload/ag1kZXZ-a2l3aS1mbGFnciILEhVfX0Jsb2JVcGxvYWRTZXNzaW9uX18YgICAgIDArwkM" method="POST" enctype="multipart/form-data">
+
+    <form  role="form" action="http://127.0.0.1:8080/_ah/upload/ag1kZXZ-a2l3aS1mbGFnciILEhVfX0Jsb2JVcGxvYWRTZXNzaW9uX18YgICAgIDArwkM" method="POST" enctype="multipart/form-data">
         Upload File: <input type="file" name="file"> <br>
-        <input type="submit" name="submit" value="Submit">
-</form>
+        <div class="form-group">
+            <label for="name" class="control-label">Name</label>
+
+            <input type="text" class="form-control" id="name" placeholder="Name" required="">
+
+        </div>
+        <div class="form-group">
+            <label for="website" class="control-label">Personal Website</label>
+            <p class="help-block">If you have more artwork available (DeviantArt, a blog, online prints etc) feel free to link to it here.</p>
+
+            <input type="text" class="form-control" id="website" placeholder="http://www.example.com">
+
+        </div>
+        <label class="control-label">Social Media</label>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="facebook" value="">
+                Facebook
+            </label>
+
+
+
+        </div>
+         <input type="text" class="form-control" id="facebook" ng-if="facebook" placeholder="Enter you FaceBook link here">
+        <div class="checkbox">
+            <label>
+                <input class="" type="checkbox" ng-model="googleplus" value="">
+                Google Plus
+            </label>
+        </div>
+        <input type="text" class="form-control" id="googleplus" ng-if="googleplus" placeholder="Enter you Google+ link here">
+
+        <div class="checkbox">
+            <label>
+            <input type="checkbox" ng-model="twitter" value="">
+            Twitter
+        </label>
+        </div>
+         <input type="text" class="form-control" id="twitter" ng-if="twitter" placeholder="Enter you Twitter link here">
+
+        <input type="submit" class="btn btn-default" name="submit" value="Submit">
+
+
+
+    </form>
 </div>
