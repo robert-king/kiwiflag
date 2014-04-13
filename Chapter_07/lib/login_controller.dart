@@ -82,7 +82,7 @@ class LoginController {
       // Initialize the client library with our OAuth2 Client
       print('making client');
       kf = new Kiwiflag(auth);
-      kf.makeAuthRequests = true;
+      kf.makeAuthRequests = false;
 
 
     //_loadData();
