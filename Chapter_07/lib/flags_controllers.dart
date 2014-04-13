@@ -60,10 +60,10 @@ class AboutController {
     selector: '[flag-viewer]',
     publishAs: 'ctrl')
 class FlagViewer {
-  String flag_link;
+  var  flag;
   FlagViewer(RouteProvider routeProvider, LoginController lc) {
     print('in flag viewer ctrl');
     var urlsafe_flagkey = routeProvider.parameters['urlsafe_flagkey'];
-    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag_link=r.img_link);
+    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag=r);
   }
 }
