@@ -27,33 +27,6 @@ class FlagsApiStringMessage {
 
 }
 
-class ModelsFlagListMessage {
-
-  core.List<ModelsFlagMessage> items;
-
-  /** Create new ModelsFlagListMessage from JSON data */
-  ModelsFlagListMessage.fromJson(core.Map json) {
-    if (json.containsKey("items")) {
-      items = json["items"].map((itemsItem) => new ModelsFlagMessage.fromJson(itemsItem)).toList();
-    }
-  }
-
-  /** Create JSON Object for ModelsFlagListMessage */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (items != null) {
-      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
-    }
-
-    return output;
-  }
-
-  /** Return String representation of ModelsFlagListMessage */
-  core.String toString() => JSON.encode(this.toJson());
-
-}
-
 class ModelsFlagMessage {
 
   core.String author_fb;
@@ -67,8 +40,6 @@ class ModelsFlagMessage {
   core.String author_name;
 
   core.String author_twitter;
-
-  core.String datetime;
 
   core.int down_votes;
 
@@ -95,9 +66,6 @@ class ModelsFlagMessage {
     }
     if (json.containsKey("author_twitter")) {
       author_twitter = json["author_twitter"];
-    }
-    if (json.containsKey("datetime")) {
-      datetime = json["datetime"];
     }
     if (json.containsKey("down_votes")) {
       down_votes = (json["down_votes"] is core.String) ? core.int.parse(json["down_votes"]) : json["down_votes"];
@@ -131,9 +99,6 @@ class ModelsFlagMessage {
     }
     if (author_twitter != null) {
       output["author_twitter"] = author_twitter;
-    }
-    if (datetime != null) {
-      output["datetime"] = datetime;
     }
     if (down_votes != null) {
       output["down_votes"] = down_votes;

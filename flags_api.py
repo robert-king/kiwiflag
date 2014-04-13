@@ -10,6 +10,8 @@ from google.appengine.ext.blobstore.blobstore import create_upload_url
 from google.appengine.api import users
 from models import Flag
 from models import FlagMessage
+from models import FlagListMessage
+from models import FlagListRequestMessage
 
 
 an_api = endpoints.api(name='kiwiflag',
@@ -25,18 +27,18 @@ class StringMessage(messages.Message):
 
 @an_api.api_class(resource_name='flags-api', path="flag-sapi")
 class FlagsApi(remote.Service):
-    @endpoints.method(message_types.VoidMessage, StringMessage,
+    @endpoints.method(FlagListRequestMessage, FlagListMessage,
                       path='flags-list', http_method='GET',
                       name='flags-list')
-    def flags_list(self, unused_request):
-        #should do pagination etc.
-        return StringMessage(s="hi")
+    def flags_list(self, request):
+        #TODO: allow sort orders from client. Enum - or see if it's built in functionality to endpoints
+        return Flag.flag_list(request)
 
     @endpoints.method(StringMessage, FlagMessage,
                       path='flag', http_method='GET',
                       name='flag')
-    def flag(self, urlsafe_flagkey):
-        flag = ndb.Key(urlsafe=urlsafe_flagkey.s).get()
+    def flag(self, request):
+        flag = ndb.Key(urlsafe=request.s).get()
         return flag.flag_message
 
     @endpoints.method(message_types.VoidMessage, StringMessage,
