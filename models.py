@@ -65,14 +65,9 @@ class Flag(ndb.Model):
     def make_flag(cls, blob_info, data):
         """
         returns: flag key
-        raises: ValidationError
         """
         logging.info('creating img_link')
-        try:
-            img_link = get_serving_url(blob_info.key()) #hopefully this will error if blob isn't an image.
-        except Exception:
-            raise messages.ValidationError("invalid image?")
-
+        img_link = get_serving_url(blob_info.key()) #hopefully this will error if blob isn't an image.
         logging.info('img_link created.. creating flag message..')
         flag_message = FlagMessage(
             img_link=img_link,
@@ -86,9 +81,10 @@ class Flag(ndb.Model):
             down_votes=0,
             datetime=datetime.datetime.now()
         )
-        logging.info('created flag message, creating flag')
-        flag_key=Flag(
+        logging.info('created flag message. Putting flag to db..')
+        flag_key = Flag(
             img_blob_key=blob_info.key(),
             flag_message=flag_message
         ).put()
+        logging.info('created flag..')
         return flag_key
