@@ -12,11 +12,33 @@ import 'package:angular_dart_demo/login_controller.dart';
     selector: '[flags]',
     publishAs: 'ctrl')
 class FlagsController {
-  List<Int> flags = [1,2];
-  FlagsController() {
+  var flags;
+
+  FlagsController(RouteProvider routeProvider, LoginController lc) {
     print('in flags ctrl');
+     lc.kf.flagsapi.flagslist(sort_order:"newest").then((r)=>flags=r);
+
+
+    }
+ test(flag){
+    print flag;
+      return 50;
+    }
+
   }
 
+
+
+@NgController(
+    selector: '[flag-viewer]',
+    publishAs: 'ctrl')
+class FlagViewer {
+  var  flag;
+  FlagViewer(RouteProvider routeProvider, LoginController lc) {
+    print('in flag viewer ctrl');
+    var urlsafe_flagkey = routeProvider.parameters['urlsafe_flagkey'];
+    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag=r);
+  }
 }
 
 
@@ -56,14 +78,3 @@ class AboutController {
 }
 
 
-@NgController(
-    selector: '[flag-viewer]',
-    publishAs: 'ctrl')
-class FlagViewer {
-  var  flag;
-  FlagViewer(RouteProvider routeProvider, LoginController lc) {
-    print('in flag viewer ctrl');
-    var urlsafe_flagkey = routeProvider.parameters['urlsafe_flagkey'];
-    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag=r);
-  }
-}
