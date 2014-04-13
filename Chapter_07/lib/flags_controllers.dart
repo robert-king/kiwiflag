@@ -53,7 +53,6 @@ class AboutController {
   AboutController() {
     print('in about ctrl');
   }
-
 }
 
 
