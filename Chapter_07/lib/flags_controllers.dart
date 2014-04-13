@@ -64,6 +64,6 @@ class FlagViewer {
   FlagViewer(RouteProvider routeProvider, LoginController lc) {
     print('in flag viewer ctrl');
     var urlsafe_flagkey = routeProvider.parameters['urlsafe_flagkey'];
-    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag_link=r.s);
+    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag_link=r.img_link);
   }
 }

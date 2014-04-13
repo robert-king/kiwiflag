@@ -9,7 +9,11 @@ from models import Flag
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
-        blob_info = upload_files[0]
+        try:
+            blob_info = upload_files[0]
+        except IndexError:
+            return self.response.write('Error: No flag images selected or uploaded')
+
         flag_message_fields = ['author_name', 'author_links', 'author_g_plus', 'author_fb', 'author_twitter', 'author_location']
         data = {k: self.request.get(k) for k in flag_message_fields}
         try:

@@ -9,6 +9,7 @@ from protorpc import remote
 from google.appengine.ext.blobstore.blobstore import create_upload_url
 from google.appengine.api import users
 from models import Flag
+from models import FlagMessage
 
 
 an_api = endpoints.api(name='kiwiflag',
@@ -31,13 +32,12 @@ class FlagsApi(remote.Service):
         #should do pagination etc.
         return StringMessage(s="hi")
 
-    @endpoints.method(StringMessage, StringMessage,
+    @endpoints.method(StringMessage, FlagMessage,
                       path='flag', http_method='GET',
                       name='flag')
     def flag(self, urlsafe_flagkey):
-        #for now only returns a link to the flags image. Perhaps FlagMessage should be msgprop of Flag.
         flag = ndb.Key(urlsafe=urlsafe_flagkey.s).get()
-        return StringMessage(s=flag.link)
+        return flag.flag_message
 
     @endpoints.method(message_types.VoidMessage, StringMessage,
                       path='upload-url', http_method='GET',

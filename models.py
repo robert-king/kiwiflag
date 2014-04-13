@@ -39,7 +39,7 @@ class Flag(ndb.Model):
         flag_message = FlagMessage(
             img_link=img_link,
             author_name=data.get('author_name'),
-            author_links=[data.get('author_links')] if req.get('author_links') else [],
+            author_links=[data.get('author_links')] if data.get('author_links') else [],
             author_g_plus=data.get('author_g_plus'),
             author_fb=data.get('author_fb'),
             author_twitter=data.get('author_twitter'),
