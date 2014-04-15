@@ -5,8 +5,8 @@ dependencies:
   browser: any
   js: any
   shadow_dom: any
-  google_kiwiflag_v1_api:
-     path: ../dart_kiwiflag_v1_api_client
+  google_flags_v1_api:
+     path: ../dart_flags_v1_api_client
 
 
 dev_dependencies:

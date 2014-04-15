@@ -53,9 +53,9 @@ packages:
     description: fixnum
     source: hosted
     version: "0.9.0"
-  google_kiwiflag_v1_api:
+  google_flags_v1_api:
     description:
-      path: "..\\dart_kiwiflag_v1_api_client"
+      path: "../dart_flags_v1_api_client"
       relative: true
     source: path
     version: "0.4.0"

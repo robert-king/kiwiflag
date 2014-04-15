@@ -16,7 +16,7 @@ class FlagsController {
 
   FlagsController(RouteProvider routeProvider, LoginController lc) {
     print('in flags ctrl');
-     lc.kf.flagsapi.flagslist(sort_order:"newest").then((r)=>flags=r);
+     lc.flags_api.flags(sort_order:"newest").then((r)=>flags=r);
 
 
     }
@@ -37,7 +37,8 @@ class FlagViewer {
   FlagViewer(RouteProvider routeProvider, LoginController lc) {
     print('in flag viewer ctrl');
     var urlsafe_flagkey = routeProvider.parameters['urlsafe_flagkey'];
-    lc.kf.flagsapi.flag(s:urlsafe_flagkey).then((r)=>flag=r);
+    lc.flags_api.flag(s:urlsafe_flagkey).then((r)=>flag=r);
+    lc.flags_api.vote("bob", urlsafe_flagkey, "up");
   }
 }
 
@@ -49,7 +50,7 @@ class UploadController {
   String upload_url;
   UploadController(LoginController lc) {
     print('in upload ctrl');
-    lc.kf.flagsapi.uploadurl().then((r)=>upload_url = r.s);
+    lc.flags_api.upload_url().then((r)=>upload_url = r.s);
   }
 }
 

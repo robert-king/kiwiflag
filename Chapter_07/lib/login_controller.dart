@@ -10,7 +10,7 @@ library login_controller;
 
 
 import 'package:angular/angular.dart';
-import 'package:google_kiwiflag_v1_api/kiwiflag_v1_api_browser.dart';
+import 'package:google_flags_v1_api/flags_v1_api_browser.dart';
 import "package:google_oauth2_client/google_oauth2_browser.dart";
 
 //import 'tooltip/tooltip_directive.dart';
@@ -22,7 +22,7 @@ import "package:google_oauth2_client/google_oauth2_browser.dart";
     publishAs: 'login_ctrl')
 class LoginController {
   GoogleOAuth2 auth;
-  KiwiFlag kf;
+  Flags flags_api;
   String login_state = 'loading-user'; // states = needs-user, loading-user, has-user, needs-hapara
 
   final CLIENT_ID = '394062384276-9qour2katafat0u9064b3a1gsrdbspm9.apps.googleusercontent.com';
@@ -81,8 +81,8 @@ class LoginController {
       }
       // Initialize the client library with our OAuth2 Client
       print('making client');
-      kf = new Kiwiflag(auth);
-      kf.makeAuthRequests = false;
+      flags_api = new Flags(auth);
+      flags_api.makeAuthRequests = false;
 
 
     //_loadData();

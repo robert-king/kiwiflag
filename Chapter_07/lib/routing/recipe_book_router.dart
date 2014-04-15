@@ -5,6 +5,7 @@ import 'package:angular/angular.dart';
 void recipeBookRouteInitializer(Router router, RouteViewFactory views) {
   views.configure({
       'flags': ngRoute(
+          defaultRoute: true,
           path: '/flags',
           view: 'view/flags.html'),
       'upload': ngRoute(

@@ -4,6 +4,8 @@ from protorpc import messages
 from protorpc import message_types
 from google.appengine.ext.ndb import msgprop
 from google.appengine.api.images import get_serving_url
+from google.appengine.ext import deferred
+from google.appengine.ext.blobstore import BlobInfo
 import datetime
 
 
@@ -19,6 +21,16 @@ class FlagListRequestMessage(messages.Message):
 
     max_results = messages.IntegerField(1, default=100)
     sort_order = messages.EnumField(Order, 2, default=Order.newest)
+
+
+class FlagVoteMessage(messages.Message):
+    class Vote(messages.Enum):
+        up = 1
+        down = 2
+
+    voters_id = messages.StringField(1, required=True)
+    flag_urlsafe_id = messages.StringField(2, required=True)
+    vote_type = messages.EnumField(Vote, 3, required=True)
 
 
 class FlagMessage(messages.Message):
@@ -42,6 +54,20 @@ class Flag(ndb.Model):
     img_blob_key = ndb.BlobKeyProperty(required=True)
     datetime = ndb.DateTimeProperty(auto_now_add=True)
     flag_message = msgprop.MessageProperty(FlagMessage, required=True, indexed_fields=['up_votes', 'down_votes'])
+
+
+
+    @classmethod
+    @ndb.transactional
+    def vote(cls, vote_message):
+        flag = cls.get_flag(vote_message.flag_urlsafe_id)
+        if vote_message.vote_type == FlagVoteMessage.Vote.up:
+            flag.flag_message.up_votes += 1
+        elif vote_message.vote_type == FlagVoteMessage.Vote.down:
+            flag.flag_message.up_votes += 1
+        flag.put()
+        logging.info('voted for voters_id: %s' % vote_message.voters_id)
+
 
     @classmethod
     def flag_list(cls, flag_list_request):
@@ -88,3 +114,24 @@ class Flag(ndb.Model):
         ).put()
         logging.info('created flag..')
         return flag_key
+
+    @classmethod
+    def get_flag(cls, urlsafe):
+        return ndb.Key(urlsafe=urlsafe).get()
+
+    @classmethod
+    def delete_flag(cls, urlsafe):
+        deferred.defer(cls._do_delete, urlsafe)
+
+    @classmethod
+    def _do_delete(cls, urlsafe):
+        logging.info('deleting flag %s' % urlsafe)
+        flag = cls.get_flag(urlsafe)
+        if flag:
+            blob_key = flag.img_blob_key
+            flag.key.delete()
+            logging.info('deleted flag')
+            deferred.defer(lambda blob_key: BlobInfo(blob_key).delete(), blob_key)
+            logging.info('set task to delete blob')
+
+
