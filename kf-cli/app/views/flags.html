@@ -1,0 +1,93 @@
+<div flags>
+    <h1>Flags..</h1>
+    <style>
+        .flags .social i {
+            padding-right:10px;
+        }
+
+        .flags .author-name {
+            margin-top: 0;
+        }
+
+        .single-flag
+        {
+            margin: 10px 0;
+        }
+
+        .flags .vote-area i {
+            padding-left: 10px;
+        }
+        .stripe {
+            background-color: #F7F5F2;
+        }
+    </style>
+    <div class="flags" >
+
+       {{ctrl.flags}}
+        <div ng-repeat="flag in ctrl.flags.items">
+            <div ng-class-odd="'stripe'">
+
+        <div class="container" >
+            <div class="row single-flag">
+            <div class="col-sm-3 hidden-xs text-right vote-area">
+                <div class="progress" style="height:4px; margin-top: 3px;">
+                    <div class="progress-bar progress-bar-success" style="width: {{ ctrl.test(flag)}}%">
+                        <span class="sr-only"> Like This</span>
+                    </div>
+                    <div class="progress-bar progress-bar-danger" style="width: 30%">
+                        <span class="sr-only">10% Don't Like This</span>
+                    </div>
+                </div>
+                <p class="">
+                    <i class="fa fa-chevron-up"></i> {{width}}
+                    <i class="fa fa-chevron-down"></i> 40
+                </p>
+
+            </div>
+            <div class="col-md-6 col-sm-6 text-right">
+
+
+
+                <img class="img-responsive text-right" ng-src="{{flag.img_link}}=s1000" ng-click="flag.show = true"/>
+            </div>
+            <div class="col-sm-3 hidden-xs">
+                <h3 class="author-name">{{flag.author_name}}</h3>
+
+                <a href="{{flag.author_links[0]}}" ng-if="flag.author_links!=null">{{flag.author_links[0]}}</a><br>
+
+                <span class="social">
+                      <a ng-if="flag.author_twitter!=''" href="{{flag.author_twitter}}"><i class="fa fa-twitter"></i></a>
+                    <a ng-if="flag.author_fb!=''" href="{{flag.author_fb}}"><i class="fa fa-facebook"></i></a>
+                    <a ng-if="flag.author_g_plus!=''" href="{{flag.author_g_plus"><i class="fa fa-google-plus"></i></a>
+
+
+
+                </span> <br>
+
+            </div>
+            <div class="col-xs-12 hidden-lg hidden-md hidden-sm" ng-hidden="flag.show">
+                <div class="col-xs-6">
+                    B. C. Linkz <br>
+                    <span class="social">
+                     <i class="fa fa-twitter"></i> <i class="fa fa-facebook"></i> <i class="fa fa-google-plus"></i>
+                </span>
+                </div>
+                <div class="col-xs-6 text-right vote-area">
+                    <div class="progress" style="height:4px; margin-top: 7px;">
+                        <div class="progress-bar progress-bar-success" style="width: 35%">
+                            <span class="sr-only">35% Like This</span>
+                        </div>
+                        <div class="progress-bar progress-bar-danger" style="width: 30%">
+                            <span class="sr-only">10% Don't Like This</span>
+                        </div>
+                    </div>
+                    <i class="fa fa-chevron-up"></i> 65 <i class="fa fa-chevron-down"></i> 40
+                </div>
+
+
+
+            </div></div>  </div>
+        </div>
+</div>
+    </div>
+</div>

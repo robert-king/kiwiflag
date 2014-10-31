@@ -20,7 +20,7 @@ class FlagListRequestMessage(messages.Message):
         oldest = 4
 
     max_results = messages.IntegerField(1, default=100)
-    sort_order = messages.EnumField(Order, 2, default=Order.newest)
+    order = messages.EnumField(Order, 2, default=Order.newest)
 
 
 class FlagVoteMessage(messages.Message):
@@ -78,8 +78,7 @@ class Flag(ndb.Model):
             Order.newest: -cls.datetime,
             Order.oldest: cls.datetime
         }
-        ord = order_map[flag_list_request.sort_order]
-        print ord, flag_list_request.sort_order
+        ord = order_map[flag_list_request.order]
         q = cls.query().order(ord).fetch(min(flag_list_request.max_results, 500))
         return cls._to_messages(q)
 

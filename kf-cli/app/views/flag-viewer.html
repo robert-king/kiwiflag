@@ -1,0 +1,111 @@
+<div flag-viewer ng-cloak ng-init="up-vote = ctrl.flag.up_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes); down-vote = ctrl.flag.down_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes) ">
+    <Style>
+        .loading {
+            text-align: center;
+            font-size: 40px;
+        }
+    </Style>
+    <div class="loading" ng-if="ctrl.flag==null">
+        Loading <i class="fa fa-spinner fa-spin"></i>
+    </div>
+    <div class="container" ng-if="ctrl.flag!=null">
+
+        <img class="img-responsive" ng-src="{{ctrl.flag.img_link}}">
+
+
+        <div class="row">
+            <div class="col-xs-12 visible-xs">
+                      <div class="progress" style="height:4px; margin-top: 3px;">
+                    <div class="progress-bar progress-bar-success" style="width: {{ ctrl.flag.up_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes)}}%">
+                        <span class="sr-only">{{ ctrl.flag.up_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes)}}% Like This</span>
+                    </div>
+                    <div class="progress-bar progress-bar-danger" style="width: {{ ctrl.flag.down_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes) }}%">
+                        <span class="sr-only">{{ ctrl.flag.down_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes) }}% Don't Like This</span>
+                    </div>
+
+                </div>   <p class="text-right">
+                    <i class="fa fa-chevron-up"></i> {{ ctrl.flag.up_votes }}
+                    <i class="fa fa-chevron-down"></i> {{ ctrl.flag.down_votes }}
+                </p>
+        </div>
+            <div class="col-sm-6">
+                <h1></h1>
+                Submitted by <h3>{{ctrl.flag.author_name}}</h3>
+                Artists other pages:
+                <a href="{{ctrl.flag.author_g_plus}}" ng-if="ctrl.flag.author_g_plus!=''">Google Plus <i class="fa fa-external-link"></i></a>
+                <a href="{{ctrl.flag.author_fb}}" ng-if="ctrl.flag.author_fb!=''">FaceBook <i class="fa fa-external-link"></i></a>
+                <a href="{{ctrl.flag.author_twitter}}" ng-if="ctrl.flag.author_twitter!=''">Twitter <i class="fa fa-external-link"></i></a>
+            </div>
+
+
+            <div class="col-sm-6 row hidden-xs">
+                <div class="col-sm-12 text-right">
+                  Share
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-facebook fa-stack-1x"></i>
+                        </span>
+
+
+                         <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-google-plus fa-stack-1x"></i>
+                        </span>
+
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x"></i>
+                        </span>
+
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-pinterest fa-stack-1x"></i>
+                        </span>
+
+            </div>
+                <div class="col-sm-7 col-md-6 col-lg-5 col-lg-offset-7 col-md-offset-6 col-sm-offset-5 ">
+                      <div class="progress" style="height:4px; margin-top: 3px;">
+                    <div class="progress-bar progress-bar-success" style="width: {{ ctrl.flag.up_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes)}}%">
+                        <span class="sr-only">35% Like This</span>
+                    </div>
+                    <div class="progress-bar progress-bar-danger" style="width: {{ ctrl.flag.down_votes / (ctrl.flag.down_votes + ctrl.flag.up_votes) }}%">
+                        <span class="sr-only">10% Don't Like This</span>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <i class="fa fa-chevron-up"></i> {{ ctrl.flag.up_votes }}
+                    <i class="fa fa-chevron-down"></i> {{ ctrl.flag.down_votes }}
+                </p>
+                </div>
+
+                </div>
+
+            </div>
+<div class="visible-xs">
+                     <h4>Share this flag</h4>
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-facebook fa-stack-1x"></i>
+                        </span>
+
+
+                         <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-google-plus fa-stack-1x"></i>
+                        </span>
+
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x"></i>
+                        </span>
+
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-pinterest fa-stack-1x"></i>
+                        </span>
+
+            </div>
+        </div>
+    </div>
+
+</div>

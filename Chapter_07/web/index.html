@@ -40,9 +40,9 @@
         background-color: #f4f4f4;
     }
     .nav>li>a:hover, .nav>li>a:focus {
-text-decoration: none;
- background-color:inherit;
-}
+        text-decoration: none;
+        background-color:inherit;
+    }
     .nav>li>a:active {
         color: #333333;
     }
@@ -54,31 +54,32 @@ text-decoration: none;
     }
 </style>
 <nav class="navbar navbar-fixed-top" role="navigation">
-      <div class="container">
+    <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="/kiwiflag/images/nzflag-logo.png"></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="/kiwiflag/images/nzflag-logo.png"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
-          <ul class="nav navbar-nav">
-           <li class="active"><a href="#/flags">NZ Flags</a></li>
-    <li class="active"><a href="#/upload">Upload</a></li>
-    <li class="active"><a href="#/discus">Discus</a></li>
-    <li class="active"><a href="#/about">About</a></li>
-          </ul>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#/flags">NZ Flags</a></li>
+                <li class="active"><a href="#/upload">Upload</a></li>
+                <li class="active"><a href="#/discus">Discus</a></li>
+                <li class="active"><a href="#/about">About</a></li>
+            </ul>
         </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+    </div><!-- /.container-fluid -->
+</nav>
 
 <div>
+    <button class="btn" ng-click="ctrl.do_login()">Login</button>
     <ng-view></ng-view>
 </div>
 
