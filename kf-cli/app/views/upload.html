@@ -12,6 +12,9 @@
 <div class="container" upload>
     {{upload_url}}
     <br>
+    <form class="dropzone" method="post" enctype="multipart/form-data" ng-dropzone dropzone="dropzone" dropzone-config="dropzoneConfig">
+  <input name="file" type="file" multiple />
+</form>
 
     <form  role="form" ng-action="{{upload_url}}" method="POST" enctype="multipart/form-data">
         Upload File: <input type="file" name="file"> <br>

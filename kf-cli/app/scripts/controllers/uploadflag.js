@@ -8,7 +8,10 @@ angular.module('kfCliApp')
 //        $scope.upload_url = r.s;
 //      });
 //    }, function(e) {console.log(e);});
-
+$scope.dropzoneConfig = {
+  parallelUploads: 3,
+  maxFileSize: 30
+};
     $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
     for (var i = 0; i < $files.length; i++) {
