@@ -19,7 +19,8 @@ angular
     'ngRoute',
     'gapi.client',
     'angularFileUpload',
-    'ngDropzone'
+    'ngDropzone',
+    'angularMoment'
   ])
   .config(function ($routeProvider) {
     $routeProvider

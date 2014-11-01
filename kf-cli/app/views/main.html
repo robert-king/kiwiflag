@@ -53,23 +53,28 @@
                     <div class="row single-flag">
                         <div class="col-sm-3 hidden-xs text-right vote-area">
 
-                            <p class="">
-                                <i class="fa fa-chevron-up"></i> {{width}}
-                                <i class="fa fa-chevron-down"></i> 40
-                            </p>
-
-                        </div>
-                        <div class="col-md-6 col-sm-6 text-right">
-
-
-
-                            <img class="img-responsive text-right" ng-src="{{flag.img_link}}" ng-click="flag.show = true"/><!-- removed =s1000 from end of img link.. for now.. -->
-                            <i class="fa  fa-thumbs-o-up  fa-2x pull-left fa-border"></i>
-                            <i class="fa  fa-thumbs-o-down  fa-2x pull-left fa-border"></i>
-
-                        </div>
-                        <div class="col-sm-3 hidden-xs">
                             <h3 class="author-name">{{flag.author_name}}</h3>
+        <span am-time-ago="flag.datetime"></span>
+
+
+
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+
+
+
+                            <img class="img-responsive " ng-src="{{flag.img_link}}" ng-click="flag.show = true"/><!-- removed =s1000 from end of img link.. for now.. -->
+
+                            <p ng-pluralize count=" {{flag.up_votes}}"
+                            when="{'-1': '{} point',
+                                  '1': '{} point',
+                                'other': '{} points'}">
+                            </p>
+                            <i class="fa  fa-thumbs-o-up  fa-2x  fa-border"></i>
+                            <i class="fa  fa-thumbs-o-down  fa-2x  fa-border"></i>
+
+                        </div>
+
 
 
                             <a href="{{flag.author_links[0]}}" ng-if="flag.author_links!=null">{{flag.author_links[0]}}</a><br>
