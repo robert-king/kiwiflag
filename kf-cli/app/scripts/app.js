@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ngRoute',
     'gapi.client',
-    'angularFileUpload'
+    'angularFileUpload',
+    'ngDropzone'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -32,11 +33,11 @@ angular
       })
       .when('/discus', {
         templateUrl: 'views/discus.html',
-        controller: 'DiscusController'
+        controller: 'DiscuscontrollerCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'AboutController'
+        controller: 'AboutcontrollerCtrl'
       })
       .otherwise({
         redirectTo: '/'
