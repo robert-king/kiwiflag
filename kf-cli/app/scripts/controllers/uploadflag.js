@@ -1,13 +1,32 @@
 'use strict';
 
 angular.module('kfCliApp')
-  .controller('UploadflagCtrl', function ($scope, gapi, $upload) {
-//    $scope.upload_url = '';
-//    gapi.load('flags').then(function(){
-//      gapi.client.flags.upload_url().then(function(r){
-//        $scope.upload_url = r.s;
-//      });
-//    }, function(e) {console.log(e);});
+  .controller('UploadflagCtrl', function ($scope, gapi, $upload, $http) {
+    $scope.upload_url = '';
+    gapi.load('flags').then(function(){
+      gapi.client.flags.upload_url().then(function(r){
+        $scope.upload_url = r.s;
+      });
+    }, function(e) {console.log(e);});
+
+
+    $scope.uploadFile = function() {
+      var file = $scope.myFile;
+      var fd = new FormData();
+        fd.append('file', file);
+        fd.append('author_name', 'rob');
+        $http.post($scope.upload_url, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+        })
+        .error(function(){
+        });
+    };
+
+
+
 
     $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.

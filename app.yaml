@@ -16,7 +16,7 @@ handlers:
 #  secure: always
 
 - url: /kiwiflag
-  static_dir: Chapter_07
+  static_dir: kf-cli/dist
   secure: always
 
 
