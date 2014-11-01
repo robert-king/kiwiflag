@@ -22,7 +22,8 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
             logging.error('invalid flag')
             logging.info(data)
             self.response.write('invalid flag')
-        self.redirect('/kiwiflag/web/index.html#/flag-viewer/%s' % flag_key.urlsafe())
+        self.response.write('{"flagKey": %s"}' % flag_key.urlsafe())
+        #self.redirect('/kiwiflag/web/index.html#/flag-viewer/%s' % flag_key.urlsafe())
 
 
 class RedirectToTestApp(webapp2.RequestHandler):

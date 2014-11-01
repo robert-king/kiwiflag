@@ -1,72 +1,54 @@
 'use strict';
 
 angular.module('kfCliApp')
-
-
   .controller('UploadflagCtrl', function ($scope, gapi, $upload, $http) {
-    $scope.upload_url = '';
-    gapi.load('flags').then(function(){
-      gapi.client.flags.upload_url().then(function(r){
-        $scope.upload_url = r.s;
-      });
-    }, function(e) {console.log(e);});
+    $scope.uploadUrl = '';
+    $scope.formData = {};
+    $scope.success = false;
+    $scope.missingFile = false;
+    $scope.fail = false;
+    $scope.myFile = null;
 
-$scope.dropzoneConfig = {
-  autoDiscover:false,
-  url:'test.com',
-  parallelUploads: 3,
-  maxFileSize: 30
-}
-
-
-    $scope.uploadFile = function() {
-      var file = $scope.myFile;
-      var fd = new FormData();
-        fd.append('file', file);
-        fd.append('author_name', 'rob');
-        $http.post($scope.upload_url, fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        })
-        .success(function(){
-        })
-        .error(function(){
+    var refreshUploadUrl = function() {
+      gapi.load('flags').then(function(){
+        gapi.client.flags.upload_url().then(function(r){
+          $scope.uploadUrl = r.s;
         });
+      }, function(e) {console.log(e);});
     };
 
+    refreshUploadUrl();
 
-
-
-    $scope.onFileSelect = function($files) {
-    //$files: an array of files selected, each file has name, size, and type.
-    for (var i = 0; i < $files.length; i++) {
-      var file = $files[i];
-      $scope.upload = $upload.upload({
-        url: 'server/upload/url', //upload.php script, node.js route, or servlet url
-        //method: 'POST' or 'PUT',
-        //headers: {'header-key': 'header-value'},
-        //withCredentials: true,
-        data: {myObj: $scope.myModelObj},
-        file: file, // or list of files ($files) for html5 only
-        //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-        // customize file formData name ('Content-Disposition'), server side file variable name.
-        //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file'
-        // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-        //formDataAppender: function(formData, key, val){}
-      }).progress(function(evt) {
-        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-      }).success(function(data, status, headers, config) {
-        // file is uploaded successfully
-        console.log(data);
+    $scope.uploadFile = function() {
+      var url = $scope.uploadUrl;
+      $scope.success = false;
+      $scope.fail = false;
+      $scope.missingFile = false;
+      var file = $scope.myFile;
+      if (!file) {
+        $scope.missingFile = true;
+        return;
+      }
+      $scope.uploadUrl = '';
+      var fd = new FormData();
+      fd.append('file', file);
+      angular.forEach($scope.formData, function(v, k) {
+        fd.append(k, v);
       });
-      //.error(...)
-      //.then(success, error, progress);
-      // access or attach event listeners to the underlying XMLHttpRequest.
-      //.xhr(function(xhr){xhr.upload.addEventListener(...)})
-    }
-    /* alternative way of uploading, send the file binary with the file's content-type.
-       Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed.
-       It could also be used to monitor the progress of a normal http post/put request with large data*/
-    // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
-  };
+      $http.post(url, fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+      })
+        .success(function(r){
+          console.log('success', r);
+          console.log('link', '#/flag-viewer/' + r.flagKey);
+          refreshUploadUrl();
+          $scope.success = true;
+        })
+        .error(function(e){
+          console.log('error', e);
+          refreshUploadUrl();
+          $scope.fail = true;
+        });
+    };
   });
