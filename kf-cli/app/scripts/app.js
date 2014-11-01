@@ -18,8 +18,7 @@ angular
     'ngSanitize',
     'ngRoute',
     'gapi.client',
-    'angularFileUpload',
-    'ngDropzone'
+    'angularFileUpload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
