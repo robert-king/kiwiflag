@@ -1,6 +1,17 @@
 'use strict';
 
 angular.module('kfCliApp')
+  .controller('UploadflagCtrl', function ($scope, gapi, $upload) {
+//    $scope.upload_url = '';
+//    gapi.load('flags').then(function(){
+//      gapi.client.flags.upload_url().then(function(r){
+//        $scope.upload_url = r.s;
+//      });
+//    }, function(e) {console.log(e);});
+$scope.dropzoneConfig = {
+  parallelUploads: 3,
+  maxFileSize: 30
+};
   .controller('UploadflagCtrl', function ($scope, gapi, $upload, $http) {
     $scope.upload_url = '';
     gapi.load('flags').then(function(){

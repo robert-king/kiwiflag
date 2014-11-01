@@ -30,6 +30,14 @@ angular
         templateUrl: 'views/upload.html',
         controller: 'UploadflagCtrl'
       })
+      .when('/discus', {
+        templateUrl: 'views/discus.html',
+        controller: 'DiscusController'
+      })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutController'
+      })
       .otherwise({
         redirectTo: '/'
       });
