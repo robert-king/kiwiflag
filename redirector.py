@@ -27,7 +27,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 
 class RedirectToTestApp(webapp2.RequestHandler):
     def get(self):
-        self.redirect('/kiwiflag/web/index.html')
+        self.redirect('/kiwiflag/index.html')
         #self.response.write('use chromium and go to     /kiwiflag/web/index.html')
 
 
