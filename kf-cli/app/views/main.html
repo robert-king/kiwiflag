@@ -22,16 +22,15 @@
         }
     </style>
     <div class="flags" >
-
-       {{ctrl.flags}}
-        <div ng-repeat="flag in ctrl.flags.items">
+       {{flags}}
+        <div ng-repeat="flag in flags">
             <div ng-class-odd="'stripe'">
 
         <div class="container" >
             <div class="row single-flag">
             <div class="col-sm-3 hidden-xs text-right vote-area">
                 <div class="progress" style="height:4px; margin-top: 3px;">
-                    <div class="progress-bar progress-bar-success" style="width: {{ ctrl.test(flag)}}%">
+                    <div class="progress-bar progress-bar-success" style="width: 50%">
                         <span class="sr-only"> Like This</span>
                     </div>
                     <div class="progress-bar progress-bar-danger" style="width: 30%">
@@ -48,7 +47,7 @@
 
 
 
-                <img class="img-responsive text-right" ng-src="{{flag.img_link}}=s1000" ng-click="flag.show = true"/>
+                <img class="img-responsive text-right" ng-src="{{flag.img_link}}" ng-click="flag.show = true"/><!-- removed =s1000 from end of img link.. for now.. -->
             </div>
             <div class="col-sm-3 hidden-xs">
                 <h3 class="author-name">{{flag.author_name}}</h3>

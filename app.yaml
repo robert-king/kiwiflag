@@ -15,9 +15,7 @@ handlers:
 #  upload: favicon\.ico
 #  secure: always
 
-- url: /kiwiflag
-  static_dir: kf-cli/dist
-  secure: always
+
 
 
 #- url: /test-app
@@ -38,9 +36,19 @@ handlers:
 #  static_dir: Chapter_07_new
 #  secure: always
 #
-- url: .*
+- url: /upload-flag
   script: redirector.app
 #  secure: always
+
+- url: /
+  upload: kf-cli/app/index.html
+  static_files: kf-cli/app/index.html
+
+
+- url: /
+  static_dir: kf-cli/app
+  secure: always
+
 
 
 libraries:
