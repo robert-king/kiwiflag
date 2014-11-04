@@ -22,6 +22,11 @@
         }
           .abc > span {width:50%; display: inline-block;}
 
+          .text-right-unstacked {text-align: right;}
+        @media screen and (max-width: 767px){
+            .text-right-unstacked {text-align: left;}
+        }
+
     </style>
     <div class="flags container" >
         <h1>Flags</h1>
@@ -44,14 +49,12 @@
             <div ng-class-odd="'stripe'">
                 <div class="container" >
                     <div class="row single-flag">
-                        <div class="col-sm-3 hidden-xs text-right vote-area">
+                        <div class="col-sm-3 text-right-unstacked vote-area">
                             <h3 class="author-name">{{flag.author_name}}</h3>
                             <span am-time-ago="flag.datetime"></span>
                         </div>
                         <div class="col-md-6 col-sm-6">
-                            <div class="visible-xs-block">
-                                <h3 class="author-name">{{flag.author_name}} <small am-time-ago="flag.datetime"></small></h3>
-                                </div>
+
                             <img class="img-responsive" ng-src="{{flag.img_link}}" ng-click="flag.show = true"/><!-- removed =s1000 from end of img link.. for now.. -->
                             <div class="abc">
                                <span ng-pluralize count=" {{flag.up_votes}}"
